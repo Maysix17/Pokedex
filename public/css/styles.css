@@ -1,0 +1,83 @@
+.body{
+  font-family: sans-serif;
+  background-image: url(../image/fondo.jpeg);
+}
+
+.pokemon {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+  display: inline-block;
+  width: 120px;
+  background-color: #f4f4f4;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.pokemon img {
+  width: 80px;
+  height: 80px;
+}
+
+.pokemon.registered {
+  background-color: #9fdef3;
+  border-color: #a6bcf5;
+}
+.details-container {
+  max-width: 400px;
+  margin: 50px auto;
+  padding: 20px;
+  border: 2px solid #ccc;
+  border-radius: 16px;
+  background-color: #f9f9f9;
+  text-align: center;
+}
+
+.pokemon-card img {
+  width: 150px;
+}
+
+.button-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.titulo {
+  color: #ffffff;
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+}
+
+.registro-mensaje {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+
+.registro-mensaje {
+  margin-top: 8px;
+  font-size: 0.9rem;
+  text-align: center;
+  transition: opacity 0.3s;
+}
+
+.registro-mensaje.success {
+  color: green;
+}
+
+.registro-mensaje.warning {
+  color: orange;
+}
+
+.registro-mensaje.error {
+  color: red;
+}
+@keyframes fadein {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
