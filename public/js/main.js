@@ -1,6 +1,6 @@
 const pokemonList = document.getElementById("pokemon-list");
 
-const limit = 150;
+const limit = 600;
 const offset = 0;
 
 // Cargar los Pokémon al iniciar
@@ -31,9 +31,7 @@ async function loadPokemons() {
 
     // Evento de click para registrar si no existe
     div.addEventListener("click", async () => {
-      const mensaje = await handleRegister(pokemonData, div); // ← se pasa el div como contenedor
-
-      // Redireccionar después de 1.5 segundos
+      await handleRegister(pokemonData); // ← quitamos mensaje y container
       setTimeout(() => {
         window.location.href = `details.html?name=${pokemonData.name}`;
       }, 1500);
@@ -57,10 +55,10 @@ async function checkIfRegistered(name, div) {
   }
 }
 
-// Registrar en tu API
-async function handleRegister(pokemon, container) {
+// Registrar en tu API (sin mostrar mensajes)
+async function handleRegister(pokemon) {
   try {
-    const response = await fetch('http://localhost:3000/api/pokemon', {
+    await fetch('http://localhost:3000/api/pokemon', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -76,51 +74,9 @@ async function handleRegister(pokemon, container) {
         image: pokemon.sprites.front_default,
       }),
     });
-
-    let messageText = '';
-    let messageClass = 'success';
-
-    if (response.ok) {
-      messageText = 'El Pokémon ha sido registrado correctamente.';
-      messageClass = 'success';
-    } else {
-      const text = await response.text();
-      if (text.includes('ya existe')) {
-        messageText = 'El Pokémon ya está registrado.';
-        messageClass = 'warning';
-      } else {
-        messageText = 'Error al registrar el Pokémon.';
-        messageClass = 'error';
-      }
-    }
-
-    showRegistroMensaje(container, messageText, messageClass); // ← Aquí ya está bien
-    return messageText;
   } catch (error) {
     console.error('Error al registrar:', error);
-    showRegistroMensaje(container, 'Error de red al registrar el Pokémon.', 'error'); // ← también acá
-    return 'Error de red al registrar el Pokémon.';
   }
-}
-
-// Mostrar mensaje en el DOM (debajo del Pokémon)
-function showRegistroMensaje(container, message, className) {
-  if (!(container instanceof HTMLElement)) return;
-
-  const oldMsg = container.nextElementSibling;
-  if (oldMsg && oldMsg.classList.contains('registro-mensaje')) {
-    oldMsg.remove();
-  }
-
-  const msg = document.createElement('div');
-  msg.className = `registro-mensaje ${className}`;
-  msg.textContent = message;
-
-  container.insertAdjacentElement('afterend', msg);
-
-  setTimeout(() => {
-    msg.remove();
-  }, 3000);
 }
 
 loadPokemons();
