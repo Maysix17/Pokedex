@@ -29,9 +29,9 @@ async function loadPokemons() {
     // Verificar si ya está registrado
     checkIfRegistered(pokemonData.name, div);
 
-    // Evento de click para registrar si no existe
+    // Evento de click para registrar 
     div.addEventListener("click", async () => {
-      await handleRegister(pokemonData); // ← quitamos mensaje y container
+      await handleRegister(pokemonData);
       setTimeout(() => {
         window.location.href = `details.html?name=${pokemonData.name}`;
       }, 1500);
@@ -55,7 +55,7 @@ async function checkIfRegistered(name, div) {
   }
 }
 
-// Registrar en tu API (sin mostrar mensajes)
+// Registrar en tu API 
 async function handleRegister(pokemon) {
   try {
     await fetch('http://localhost:3000/api/pokemon', {
